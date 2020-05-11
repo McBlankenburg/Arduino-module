@@ -5,19 +5,20 @@ DHT dht;
 
 
 #define PIR 2
-
+#define BUZZ A0
 
 void setup() {
  Serial.begin(9600); //Setting speed transmition
-  pinMode(PIR, INPUT); //PIR input
-
-   dht.setup(DHT11_PIN);
+ 
+  pinMode(PIR,  INPUT); //PIR input
+  pinMode( A0, OUTPUT); //PIN A0 output
+  
+  dht.setup(DHT11_PIN);
 }
  
 void loop() {
    pirDetector();
    dhtDetector();
-
 
    
   delay(1000);
@@ -49,4 +50,13 @@ void dhtDetector(){
   }
   delay(dht.getMinimumSamplingPeriod());
 
+}
+
+void buzzer(){  // only to alarm something
+
+  digitalWrite(BUZZ, HIGH);
+  delay(1);
+   digitalWrite(BUZZ, LOW);
+
+  
 }
