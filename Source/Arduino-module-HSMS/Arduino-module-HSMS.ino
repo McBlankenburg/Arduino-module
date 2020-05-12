@@ -19,7 +19,6 @@ void setup() {
 void loop() {
    pirDetector();
    dhtDetector();
-
    
   delay(1000);
   Serial.println("_____________________");
@@ -52,11 +51,13 @@ void dhtDetector(){
 
 }
 
-void buzzer(){  // only to alarm something
+void buzzer(int howLongScream, int howManyTimes, int howLongSilence) // ALARM with settings
+{  
+  for(int i = 1; i <= howManyTimes; i++){
+    digitalWrite(BUZZ, HIGH);
+    delay(howLongScream);
+    digitalWrite(BUZZ, LOW);
+    delay(howLongSilence);
+  }
 
-  digitalWrite(BUZZ, HIGH);
-  delay(1);
-   digitalWrite(BUZZ, LOW);
-
-  
 }
