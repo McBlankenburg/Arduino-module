@@ -14,25 +14,28 @@ void setup() {
   pinMode( A0, OUTPUT); //PIN A0 output
   
   dht.setup(DHT11_PIN);
+
+  buzzer(200, 1, 500);
 }
  
 void loop() {
    pirDetector();
    dhtDetector();
    
-  delay(1000);
-  Serial.println("_____________________");
+  delay(30000);
 }
 
 
 void pirDetector(){
+
+  Serial.print("Motion detector: ");
   
     if (digitalRead(PIR) == HIGH) { //when detector sees movement
-    Serial.println("movement detected");  
+    Serial.println("True");  
   }
   
   else {                            //when detector cannot see movement
-    Serial.println("no movement");
+    Serial.println("False");
   }
 }
 
@@ -42,10 +45,13 @@ void dhtDetector(){
   int temperature = dht.getTemperature();
 
   if (dht.getStatusString() == "OK") {
-    Serial.print(humidity);
-    Serial.print("%RH | ");
+    //humidity message
+    Serial.print("Humidity[%RH]: ");
+    Serial.println(humidity);
+    
+    //temperature message
+    Serial.print("Temperature[*C]: ");
     Serial.print(temperature);
-    Serial.println("*C");
   }
   delay(dht.getMinimumSamplingPeriod());
 
