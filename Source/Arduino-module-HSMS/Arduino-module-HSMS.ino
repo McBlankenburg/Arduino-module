@@ -16,13 +16,16 @@ void setup() {
   dht.setup(DHT11_PIN);
 
   buzzer(200, 1, 500);
+  Serial.println("Arduino Start");
 }
  
 void loop() {
+  delay(500);
+  Serial.println();
    pirDetector();
    dhtDetector();
    
-  delay(30000);
+  delay(1000);
 }
 
 
